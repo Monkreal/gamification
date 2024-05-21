@@ -1,0 +1,51 @@
+{{ extends "template.html" }}
+
+{{ block vcontent }}
+
+{{ if player.id_in_group == 1 }}
+
+<div>
+    <!--what the Admin shoud show in the Game Place here-->
+    <h2>Titel</h2>
+    <p>Beschreibung"</p>
+    <!--Show how many players are ready wich are in the Game-->
+    <p><span id="ready">{{ player.subsession.session.vars.get('ready', 0) }}</span> / {{ player.subsession.session.vars.get('players', 0) }}</p>
+</div>
+
+
+<div>
+    <!--Button for Admin to go to the next Page-->
+    <div class="forwardbutton" onclick="adminnext()">
+        <p>nächste Runde</p>
+    </div>
+</div>
+
+{{ else }}
+
+<div>
+    <!--Infos for Player individuel-->
+    <h2>Titel</h2>
+    <p>Punkte: {{ player.participant.vars.get('points', 0) }}</p>
+</div>
+
+{{ if player.participant.vars.get('notready', True) }}
+
+<div id="ready">
+    <!--What the Player can do-->
+    <div class="choicebutton" onclick="choice()">
+        <p>bestätigen</p>
+    </div>
+</div>
+
+{{ endif }}
+
+{{ endif }}
+
+<script>
+    //function for the Player or the Admin extra
+    function choice() {
+        liveSend({ choice: document.getElementById('input1').value })
+    }
+</script>
+
+{{ endblock }}

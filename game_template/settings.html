@@ -1,0 +1,27 @@
+{{ extends "template.html" }}
+
+{{ block vcontent }}
+
+<div>
+    <!--Input for example-->
+    <div class="inputgroup">
+        <span>Text</span>
+        <input type="text" id="input1" placeholder="Eingabe">
+    </div>
+</div>
+
+<div>
+    <!--Button for set Settings and go to checkin-->
+    <div class="forwardbutton" onclick="adminnextspecial()">
+        <p>start the Game</p>
+    </div>
+</div>
+
+<script>
+    //function for Button
+    function adminnextspecial() {
+        liveSend({ next: 'next', vermoegen: document.getElementById('input1').value})
+    }
+</script>
+
+{{ endblock }}

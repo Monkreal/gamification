@@ -1,0 +1,66 @@
+{{ extends "template.html" }}
+
+{{ block vcontent }}
+
+{{ if player.id_in_group == 1 }}
+
+<div>
+    <h2>Punkte</h2>
+    <p>"Public Good" * 1.5 / "Number of Players"</p>
+    <table>
+        <tr>
+            <th></th>
+            <th>Round 1</th>
+            <th>Round 2</th>
+            <th>Round 3</th>
+            <th>Round 4</th>
+            <th>Round 5</th>
+        </tr>
+        <tr>
+            <td>Public Good</td>
+            <td>{{ subsession1.publicgood }}</td>
+            <td>{{ subsession2.publicgood }}</td>
+            <td>{{ subsession3.publicgood }}</td>
+            <td>{{ subsession4.publicgood }}</td>
+            <td>{{ subsession5.publicgood }}</td>
+        </tr>
+    </table>
+    <p><span id="ready">{{ player.subsession.session.vars.get('ready', 0) }}</span> / {{ player.subsession.session.vars.get('players', 0) }}</p>
+</div>
+
+
+<div>
+    <div class="forwardbutton" onclick="adminnext()">
+        <p>nächste Runde</p>
+    </div>
+</div>
+
+{{ else }}
+
+<div>
+    <h2>Geben Sie Geld in den öffentlichen Pool</h2>
+    <p>Punkte: {{ player.participant.vars.get('points', 0) }}</p>
+</div>
+
+{{ if player.participant.vars.get('notready', True) }}
+
+<div id="ready">
+    <div class="doublechoice">
+        <input type="text" id="input1" placeholder="öffentlicher Pool">
+        <div class="choicebutton" onclick="choice()">
+            <p>bestätigen</p>
+        </div>
+    </div>
+</div>
+
+{{ endif }}
+
+{{ endif }}
+
+<script>
+    function choice() {
+        liveSend({ choice: document.getElementById('input1').value })
+    }
+</script>
+
+{{ endblock }}

@@ -1,0 +1,47 @@
+{{ extends "template.html" }}
+
+{{ block vcontent }}
+
+{{ if player.id_in_group == 1 }}
+
+<div>
+    <h2>Scannen um mitzuspielen</h2>
+    <img class="qrcode" src="{{static 'Pictures/qrcode.png'}}" alt="QR Code">
+    <p><span id="ready">{{ player.subsession.session.vars.get('players', 0) }}</span></p>
+</div>
+
+<div>
+    <div class="forwardbutton" onclick="adminnext()">
+        <p>start the Game</p>
+    </div>
+</div>
+
+{{ else }}
+
+<div>
+    <span id="pready">
+    {{ if player.participant.vars.get('notready', True) }}
+    <h2>Dem Spiel beitreten</h2>
+    <p>Tritt mit dem Button unten dem Spiel bei.</p>
+    {{ else }}
+    <h2>Bereit</h2>
+    <p>Sie sind für das Spiel eingetragen</p>
+    {{ endif }}
+    </span>
+</div>
+
+{{ if player.participant.vars.get('notready', True) }}
+
+<div id="ready">
+    <div class="forwardbutton" onclick="playerready()">
+        <p>beitreten</p>
+    </div>
+</div>
+
+{{ endif }}
+
+{{ endif }}
+
+{{ endblock }}
+
+

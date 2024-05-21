@@ -1,0 +1,57 @@
+{{ extends "template.html" }}
+
+{{ block vcontent }}
+
+<div id="inputs">
+    <div class="inputgroup">
+        <span>negativ / negativ</span>
+        <input type="text" id="input1" placeholder="negativ">
+        <input type="text" id="input2" placeholder="negativ">
+    </div>
+
+    <div class="inputgroup">
+        <span>negativ / positiv</span>
+        <input type="text" id="input3" placeholder="negativ">
+        <input type="text" id="input4" placeholder="positiv">
+    </div>
+
+    <div class="inputgroup">
+        <span>positiv / negativ</span>
+        <input type="text" id="input5" placeholder="positiv">
+        <input type="text" id="input6" placeholder="negativ">
+    </div>
+
+    <div class="inputgroup">
+        <span>positiv / positiv</span>
+        <input type="text" id="input7" placeholder="positiv">
+        <input type="text" id="input8" placeholder="positiv">
+    </div>
+
+    <div class="inputgroup">
+        <span>negativ name / positiv name</span>
+        <input type="text" id="input9" placeholder="negativ name">
+        <input type="text" id="input10" placeholder="positiv name">
+    </div>
+</div>
+
+<div>
+    <div class="forwardbutton" onclick="adminnextspecial()">
+        <p>Start the Game</p>
+    </div>
+</div>
+
+<script>
+    function adminnextspecial() {
+        const inputs = Array.from({ length: 10 }, (_, i) => document.getElementById(`input${i + 1}`).value);
+        const nextArray = [
+            [inputs[0], inputs[1]],
+            [inputs[2], inputs[3]],
+            [inputs[4], inputs[5]],
+            [inputs[6], inputs[7]],
+            [inputs[8], inputs[9]]
+        ];
+        liveSend({ next: nextArray });
+    }
+</script>
+
+{{ endblock }}

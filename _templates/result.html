@@ -1,0 +1,52 @@
+{{ extends "template.html" }}
+
+{{ block vcontent }}
+
+{{ if player.id_in_group == 1 }}
+
+<div>
+    <h2>Auswertung</h2>
+    <div id="carouselExample" class="carousel slide" data-bs-interval="false">
+        <div class="carousel-inner">
+            {{ for index, url in urls }}
+            <div class="carousel-item {{ if index == 1 }} active {{ endif }}">
+                <img src="{{static url}}" class="d-block w-100" alt="Chart">
+            </div>
+            {{ endfor }}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<div>
+    <div class="forwardbutton" onclick="adminnext()">
+        <p>Download PDF</p>
+    </div>
+</div>
+
+{{ else }}
+
+{{ if player.participant.vars.get('checked', False) }}
+
+<h2>Das Spiel ist zu Ende</h2>
+<p>Sie waren Spieler {{ player.id_in_group }}</p>
+<p>Punkte: {{ player.participant.vars.get('points', 0) }}</p>
+
+{{ else }}
+
+<h2>Nicht teilgenommen</h2>
+<p>Das Spiel hat bereits begonnen.</p>
+<p>Leider konnten Sie nicht teilnehmen</p>
+
+{{ endif }}
+
+{{ endif }}
+
+{{ endblock }}

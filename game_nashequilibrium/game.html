@@ -1,0 +1,71 @@
+{{ extends "template.html" }}
+
+{{ block vcontent }}
+
+{{ if player.id_in_group == 1 }}
+
+<div>
+    <h2>Punkte</h2>
+    <img class="chart" src="{{static url}}" alt="Overview">
+    <p><span id="ready">{{ player.subsession.session.vars.get('ready', 0) }}</span> / {{ player.subsession.session.vars.get('players', 0) }}</p>
+</div>
+
+
+<div>
+    <div class="forwardbutton" onclick="adminnext()">
+        <p>nächste Runde</p>
+    </div>
+</div>
+
+
+{{ else }}
+
+
+<div>
+    <h2>Treffen Sie eine Entscheidung</h2>
+    <table>
+        <tr>
+            <td>Punkte</td>
+            <td><span id="points">{{ player.participant.vars.get('points', 0) }}</span></td>
+        </tr>
+        {{ if player.round_number != 1 }}
+        <tr>
+            <td>Deine Wahl</td>
+            <td>{{ playerchoice }}</td>
+        </tr>
+        <tr>
+            <td>Partner Wahl</td>
+            <td>{{ teamplayerchoice }}</td>
+        </tr>
+        {{ endif }}
+    </table>
+</div>
+
+{{ if player.participant.vars.get('notready', True) }}
+
+<div id="ready">
+    <div class="doublechoice">
+        <div class="choicebutton" onclick="choice1()">
+            <p>{{ negativ }}</p>
+        </div>
+        <div class="choicebutton" onclick="choice2()">
+            <p>{{ positiv }}</p>
+        </div>
+    </div>
+</div>
+
+{{ endif }}
+
+{{ endif }}
+
+<script>
+    function choice1() {
+        liveSend({ choice: 'False' })
+    }
+
+    function choice2() {
+        liveSend({ choice: 'True' })
+    }
+</script>
+
+{{ endblock }}

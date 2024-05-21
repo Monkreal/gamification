@@ -1,0 +1,4 @@
+otree>=5.0.0a21
+reportlab
+matplotlib
+qrcode

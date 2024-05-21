@@ -1,0 +1,120 @@
+{{ extends "template.html" }}
+
+{{ block vcontent }}
+
+{{ if player.id_in_group == 1 }}
+
+<div>
+    <h2>Offerten</h2>
+    <table>
+        <tr>
+            <th></th>
+            <th>Angebote Verkäufer</th>
+            <th>Angebote Käufer</th>
+        </tr>
+        <tr>
+            <td>Top 1</td>
+            <td><span id="seller1">{{ selleroffer1 }}</span></td>
+            <td><span id="buyer1">{{ buyeroffer1 }}</span></td>
+        </tr>
+        <tr>
+            <td>Top 2</td>
+            <td><span id="seller2">{{ selleroffer2 }}</span></td>
+            <td><span id="buyer2">{{ buyeroffer2 }}</span></td>
+        </tr>
+        <tr>
+            <td>Top 3</td>
+            <td><span id="seller3">{{ selleroffer3 }}</span></td>
+            <td><span id="buyer3">{{ buyeroffer3 }}</span></td>
+        </tr>
+        <tr>
+            <td>Top 4</td>
+            <td><span id="seller4">{{ selleroffer4 }}</span></td>
+            <td><span id="buyer4">{{ buyeroffer4 }}</span></td>
+        </tr>
+        <tr>
+            <td>Top 5</td>
+            <td><span id="seller5">{{ selleroffer5 }}</span></td>
+            <td><span id="buyer5">{{ buyeroffer5 }}</span></td>
+        </tr>
+    </table>
+    <p><span id="ready">{{ player.subsession.session.vars.get('ready', 0) }}</span> / {{ player.subsession.session.vars.get('players', 0) }}</p>
+</div>
+
+
+<div>
+    <div class="forwardbutton" onclick="adminnext()">
+        <p>nächste Runde</p>
+    </div>
+</div>
+
+{{ else }}
+
+<div>
+    <h2>Machen Sie ein Angebot oder akzeptieren Sie das Beste Gebot</h2>
+    <table style="text-align:left;">
+        <tr>
+            <td>Sie sind {{ if player.seller }} Verkäufer {{ else }} Käufer {{ endif }}</td>
+        </tr>
+        <tr>
+           <td>Sie haben momentan <span id="points">{{ player.participant.vars.get('points', 0) }}</span> Punkte</td>
+        </tr>
+        <tr>
+            <td>{{ if player.seller }} Die Produktion kostet Sie {{ player.cost }} Punkte. {{ else }} Sie schätzen das Produkt auf {{ player.cost }} Punkte ein. {{ endif }}</td>
+        </tr>
+        <tr>
+            <td>
+                <span id="tdgebot">
+                    {{ if player.field_maybe_none('deal') != None }}
+                        {{ if player.seller }}
+                            Sie haben das Produkt für {{ player.deal }} Punkte verkauft.
+                        {{ else }}
+                            Sie haben das Produkt für {{ player.deal }} Punkte gekauft.
+                        {{ endif }}
+                    {{ else }}
+                        {{ if player.field_maybe_none('offer') != None }}
+                            {{ if player.seller }}
+                                Sie haben das Produkt für {{ player.offer }} Punkte angeboten.
+                            {{ else }}
+                                Sie haben ein Kaufangebot für {{ player.offer }} Punkte gemacht.
+                            {{ endif }}
+                        {{ else }}
+                            Sie haben noch kein Angebot gemacht.
+                        {{ endif }}
+                    {{ endif }}
+                </span>
+            </td>
+        </tr>
+    </table>
+    <p></p>        
+</div>
+
+{{ if player.participant.vars.get('notready', True) }}
+
+<div id="offer">
+    <div class="doublechoice">
+        <input type="text" id="input1" placeholder="ihr Angebot">
+        <div class="choicebutton" onclick="offer()">
+            <p>Gebot abgeben</p>
+        </div>
+        <div class="choicebutton" onclick="buy()">
+            <p>Gebot akzeptieren</p>
+        </div>
+    </div>
+</div>
+
+{{ endif }}
+
+{{ endif }}
+
+<script>
+    function offer() {
+        liveSend({ offer: document.getElementById('input1').value })
+        document.getElementById('input1').value = ''
+    }
+    function buy() {
+        liveSend({ buy: 'buy' })
+    }
+</script>
+
+{{ endblock }}

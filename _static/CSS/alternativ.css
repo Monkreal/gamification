@@ -1,0 +1,189 @@
+/* forwardbutton */
+
+.forwardbutton {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #003366;
+    color: #003366;
+}
+
+.forwardbutton:hover {
+    background-color: #003366;
+    color: white;
+    cursor: pointer;
+}
+
+.forwardbutton>* {
+    margin: 0px;
+}
+
+/* QR Code */
+
+@media (min-width: 1280px) {
+    .qrcode {
+        width: 600px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .qrcode {
+        width: 100%;
+    }
+}
+
+/* inputgroup */
+
+.inputgroup {
+    display: flex;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.inputgroup>* {
+    flex: 1 1 1px;
+    background-color: white;
+    border: none;
+    outline: none;
+    padding: 10px;
+    text-align: left;
+    font-size: 1em;
+}
+
+.inputgroup>input {
+    color: grey;
+}
+
+.inputgroup>input:focus {
+    color: black;
+}
+
+@media (min-width: 1280px) {
+    .inputgroup>* {
+        border-left: solid 1px black;
+    }
+
+    .inputgroup>*:nth-child(1) {
+        border: none;
+        border-radius: 10px 0px 0px 10px;
+    }
+
+    .inputgroup>*:nth-last-child(1) {
+        border-radius: 0px 10px 10px 0px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .inputgroup {
+        flex-direction: column;
+    }
+
+    .inputgroup>* {
+        border-top: solid 1px black;
+    }
+
+    .inputgroup>*:nth-child(1) {
+        border: none;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .inputgroup>*:nth-last-child(1) {
+        border-radius: 0px 0px 10px 10px;
+    }
+}
+
+/* nashcontainer */
+
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr; /* Außenkleinere Spalten */
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    width: 100%;
+    margin: auto;
+}
+
+.game-cell {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.no-border {
+    border: none;
+}
+
+/* double Choice */
+
+.choicebutton {
+    padding: 10px;
+    border: 2px solid #003366;
+    color: #003366;
+}
+
+.doublechoice>* {
+    margin-bottom: 5px;
+}
+
+.doublechoice>*:nth-child(1) {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.doublechoice>*:nth-last-child(1) {
+    border-radius: 0px 0px 10px 10px;
+    margin-bottom: 0px;
+}
+
+.choicebutton:hover {
+    background-color: #003366;
+    color: white;
+    cursor: pointer;
+}
+
+.choicebutton>* {
+    margin: 0px;
+}
+
+.doublechoice>input {
+    border: 1px solid black;
+    outline: none;
+    padding: 10px;
+    text-align: left;
+    font-size: 1em;
+    width: 100%;
+}
+
+/* table */
+
+table {
+    width: 100%;
+}
+
+table>*>*>* {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+table>*>*>th:nth-child(1) {
+    border: none;
+}
+
+table>*>*>td:nth-child(1) {
+    font-weight: 600;
+}
+
+/* chart */
+
+@media (min-width: 1280px) {
+    .chart {
+        width: 1280px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .chart {
+        width: 100%;
+        max-width: 100%;
+    }
+}

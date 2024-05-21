@@ -1,0 +1,90 @@
+{{ extends "otree/Page.html" }}
+{{ load otree static }}
+
+{{ block title }}
+{{ C.GAME_NAME }}
+{{ endblock }}
+
+{{ block global_styles }}
+<link rel="icon" type="image/png" href="{{ static 'Pictures/favicon.png' }}">
+<link rel="stylesheet" href="{{ static 'CSS/base.css' }}" />
+<link rel="stylesheet" href="{{ static 'CSS/alternativ.css' }}" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+{{ endblock }}
+
+
+{{ block content }}
+
+<div class="vbody">
+    <div class="header">
+        <div class="header-inner">
+            <img class="logo" src="{{static 'Pictures/zhaw.png'}}" alt="ZHAW Logo">
+            <p>{{ C.GAME_NAME }}</p>
+        </div>
+    </div>
+
+    <div class="vcontent" id="vcontent">
+        {{ block vcontent }}{{ endblock }}
+    </div>
+</div>
+
+{{ endblock }}
+
+{{ block global_scripts }}
+
+<script>
+    function adminnext() {
+        liveSend({ next: 'next' })
+    }
+
+    function playerready() {
+        liveSend({ ready: 'ready' })
+    }
+
+    function playerchecked() {
+        liveSend({ checked: 'checked' })
+    }
+
+    function liveRecv(data) {
+        if (data.next !== undefined) {
+            document.getElementById("form").submit();
+        }
+        if (data.readyadmin !== undefined) {
+            document.getElementById('ready').innerText = data.readyadmin;
+        }
+        if (data.readyplayer !== undefined) {
+            document.getElementById('ready').style.display = "none";
+            document.getElementById('pready').innerHTML = "<h2>Bereit</h2><p>Sie sind für das Spiel eingetragen</p>"
+        }
+        if (data.error !== undefined) {
+            window.alert(data.error);
+        }
+        if (data.PDF !== undefined) {
+            window.open('/static/PDF/output.pdf', '_blank');
+        }
+        if (data.offer !== undefined) {
+            document.getElementById('tdgebot').innerText = data.offer;
+        }
+        if (data.buy !== undefined) {
+            document.getElementById('offer').style.display = "none";
+            document.getElementById('tdgebot').innerText = data.buy;
+            document.getElementById('points').innerText = data.points;
+        }
+        if (data.buyer !== undefined) {
+            document.getElementById('buyer1').innerText = data.buyer[0][1];
+            document.getElementById('buyer2').innerText = data.buyer[1][1];
+            document.getElementById('buyer3').innerText = data.buyer[2][1];
+            document.getElementById('buyer4').innerText = data.buyer[3][1];
+            document.getElementById('buyer5').innerText = data.buyer[4][1];
+        }
+        if (data.seller !== undefined) {
+            document.getElementById('seller1').innerText = data.seller[0][1];
+            document.getElementById('seller2').innerText = data.seller[1][1];
+            document.getElementById('seller3').innerText = data.seller[2][1];
+            document.getElementById('seller4').innerText = data.seller[3][1];
+            document.getElementById('seller5').innerText = data.seller[4][1];
+        }
+    }
+</script>
+
+{{ endblock }}
