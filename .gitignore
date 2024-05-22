@@ -4,5 +4,7 @@ __pycache__/
 
 db.sqlite3
 
+_static/Pictures/qrcode.png
+
 _static/PDF/charts/*
 !_static/PDF/charts/.gitkeep

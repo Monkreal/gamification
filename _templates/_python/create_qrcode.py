@@ -3,6 +3,9 @@ import os
 
 url = os.environ.get('WEB_URL')
 
+if url == None:
+    url = 'localhost:8000/'
+
 qr = qrcode.QRCode(
     version=1,
     error_correction=qrcode.constants.ERROR_CORRECT_L,
