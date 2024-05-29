@@ -129,7 +129,7 @@ class game(Page):
             teamplayer = team.teamplayer(self)
             
             template_vars['playerchoice'] = playerchoice(self)
-            template_vars['teamplayerchoice'] = playerchoice(teamplayer)
+            template_vars['teamplayerchoice'] = playerchoice(teamplayer[0])
 
         return template_vars
     

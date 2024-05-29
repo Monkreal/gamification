@@ -26,6 +26,4 @@ def teamplayer(player):
     
     players = player.subsession.get_players()
     
-    return [p for p in players if p.id_in_group in team and p.id_in_group != id][0]
-    
-    
+    return [p for p in players if p.id_in_group in team and p.id_in_group != id]
